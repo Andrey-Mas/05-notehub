@@ -24,4 +24,4 @@ dist-ssr
 *.sw?
 
 
-echo ".env" >> .gitignore
+.env*
