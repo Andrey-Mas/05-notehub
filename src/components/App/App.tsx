@@ -48,11 +48,13 @@ function App() {
     <div className={css.container}>
       <div className={css.topBar}>
         <SearchBox value={search} onChange={handleSearchChange} />
-        <Pagination
-          currentPage={page}
-          totalPages={data?.totalPages ?? 0}
-          onPageChange={handlePageChange}
-        />
+        {data && data.totalPages > 1 && (
+          <Pagination
+            currentPage={page}
+            totalPages={data.totalPages}
+            onPageChange={handlePageChange}
+          />
+        )}
         <button className={css.addButton} onClick={openModal}>
           Create note +
         </button>
@@ -65,7 +67,9 @@ function App() {
         <p className={css.empty}>No notes found.</p>
       )}
       {!isLoading && !isError && data && data.notes?.length > 0 && (
-        <NoteList notes={data.notes} onDelete={handleDelete} />
+        <>
+          <NoteList notes={data.notes} onDelete={handleDelete} />
+        </>
       )}
 
       {isModalOpen && (
